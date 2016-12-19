@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+    <h1>{{course.name}}</h1>
+    <p>{{course.description}}</p>
+    <h3>Students</h3>
+    <ul>
+        {% for student in course.users.all %}
+            <li>{{student.name}}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'new' %}"> Create a course</a>
+    <br>
+    <br>
+    <a href="{% url 'index' %}"> Go back to Courses</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new course</title>
+</head>
+<body>
+    <h1>Courses new</h1>
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+        <p> Course name: <input type="text" name="name"></p>
+        <p>Description:</p>
+        <textarea rows="4" cols="40" name="description"></textarea>
+        <p><input type="submit" value="create course"></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        table {
+            border: 2px solid black;
+            margin: 25px;
+            width: 800px;
+        }
+        .buttons {
+            display: inline-block;
+        }
+    </style>
+    <title>courses</title>
+</head>
+<body>
+    <h1>Courses new</h1>
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+        <p> Course name: <input type="text" name="name"></p>
+        <p>Description:</p>
+        <textarea rows="4" cols="40" name="description"></textarea>
+        <p><input type="submit" value="create course"></p>
+    </form>
+    <h1>Courses index</h1>
+    <table>
+        <thead>
+            <tr><th>ID</th>
+                <th>Course Name</th>
+                <th>Course Description</th>
+                <th>Date Added</th>
+                <th>Number of Students</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td>{{course.id}}</td>
+                    <td><a href="{% url 'show' course.id %}">{{course.name}}</a></td>
+                    <td>{{course.description}}</td>
+                    <td>{{course.created_at}}</td>
+                    <td>{{course.users.count}}</td>
+                    <td><form action="{% url 'destroy' %}" method="POST">{% csrf_token %}<input type="hidden" name="course_id" value="{{course.id}}"><input type="submit" value="Delete"></form></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="{% url 'new' %}"> Create a course</a></p>
+    <p><a href="{% url 'add_student_page' %}"> Add student to courses</a></p>
+    <p><a href="{% url 'login_page' %}"> Login Page</a></p>
+
+
+</body>
+</html>
